@@ -28,6 +28,7 @@ class LogIn():
         """
         self.ppi = PPI(sandbox=False)
         self.ppi.account.login_api(CONFIG['public'], CONFIG['private'])
+       
 
     def get_client(self) -> PPI:
         """Return PPI client"""

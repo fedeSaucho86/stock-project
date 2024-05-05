@@ -21,4 +21,4 @@ class Notification():
         Returns:
             None
         """
-        await self.bot.send_message(chat_id=self.chat_id, text=text)
+        await self.bot.send_message(chat_id=self.chat_id, text=text, parse_mode='Markdown')

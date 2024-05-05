@@ -30,11 +30,9 @@ class Balance():
                 print("Ticker %s Price %s Amount %s" % (
                     instrument['ticker'], instrument['price'], instrument['amount']))
                            
-    def get_historical_market_data(self,first_date:datetime, ticker:str):
-        print("\nSearching MarketData")
-        start_date = datetime(2024, 1, 1)  # Replace this line with the correct datetime object creation
+    def get_current_price(self, ticker:str, inst:str):
+        print("\nSearching MarketData: %s" % ticker)
+        start_date = datetime.now()  # Replace this line with the correct datetime object creation
         end_date = datetime.now()  # Replace this line with the correct datetime object creation
-        market_data = self.ppi.marketdata.search(ticker, "Acciones", "A-48HS", first_date, end_date)
-        for ins in market_data:
-            print("%s - %s - Volume %s - Opening %s - Min %s - Max %s" % (
-                ins['date'], ins['price'], ins['volume'], ins['openingPrice'], ins['min'], ins['max']))
+        market_data = self.ppi.marketdata.current(ticker, inst , "A-48HS")
+        return market_data['price']   
