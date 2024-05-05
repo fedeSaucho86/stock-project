@@ -1,7 +1,13 @@
-CONFIG = {
-         'public': 'VjEyWEl6U2laOGRibGk3WEJINDQ=',
-         'private': 'MmY5NGY5NjMtNWFhNy00YjFmLWI0NjctM2JiNGM0MjVjZGMw',       
-         'token':'6986135637:AAHHU2Gu-_GbfWFeGRs07BLUMLdeF4FswbQ',
-         'chat_id': '7154822209'
+from dotenv import load_dotenv
+import os
 
+load_dotenv()  # take environment variables from .env.
+
+CONFIG = {
+    'public': os.getenv('public'),
+    'private': os.getenv('private'),
+    'token': os.getenv('token'),
+    'chat_id': os.getenv('chat_id')
 }
+
+

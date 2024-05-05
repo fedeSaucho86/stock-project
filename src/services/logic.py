@@ -19,3 +19,5 @@ class Logic():
     def get_logic(self,):
         balance = Balance(self.account, self.ppi)
         asyncio.run(self.send(balance.get_balance()))
+        balance.get_balance_and_positions()
+        balance.get_historical_market_data()
