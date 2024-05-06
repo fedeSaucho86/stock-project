@@ -35,4 +35,14 @@ class Balance():
         start_date = datetime.now()  # Replace this line with the correct datetime object creation
         end_date = datetime.now()  # Replace this line with the correct datetime object creation
         market_data = self.ppi.marketdata.current(ticker, inst , "A-48HS")
-        return market_data['price']   
+        return market_data['price'] 
+
+    def get_market_data(self, ticker:str, type:str, start_date:str):
+        print("\nSearching MarketData")
+        end_date = datetime.now()  # Replace this line with the correct datetime object creation
+        market_data = self.ppi.marketdata.search(ticker, type, "A-48HS", start_date, end_date)
+        price_list = []
+        for ins in market_data:
+            price_list.append(ins['price'])
+        return price_list
+            

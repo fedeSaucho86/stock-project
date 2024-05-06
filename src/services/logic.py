@@ -18,12 +18,16 @@ class Logic():
 
     def calculate_percent_change(self, actual_price, target_price):
         print(actual_price, target_price)
+        print (round(((actual_price - target_price) / target_price) * 100, 2))
         return round(((actual_price - target_price) / target_price) * 100, 2)
+    
+    def max_price(self,price_list):
+        return max(price_list)
     
     def change_format(self,percent_list):
         result = ["Investment variation:"]
         for item in percent_list:
-            value = item[1]
+            value = item[2]
             if value > 0:
                 formatted_value = f'*{value:.2f}%* _(+{value:.2f}%)_'
             else:
@@ -33,12 +37,19 @@ class Logic():
 
     def run_stop_loss(self,):
         balance = Balance(self.account, self.ppi)
-        #asyncio.run(self.send(balance.get_balance()))
-        #balance.get_balance_and_positions()
         percent_list =[]
+        info_list = ["Historical information:"]
+        info_list.append(["Ticker", "StartPrice", "EndPrice","%Change",  "Date"])
         for instrument in CONFIG['instruments']:
-            actual_price = balance.get_current_price(instrument[0], instrument[2])
-            percentile = self.calculate_percent_change(actual_price, instrument[1])
-            percent_list.append([instrument[0],percentile])
+            price_list = balance.get_market_data(instrument[0], instrument[1], instrument[2])
+            max_price = self.max_price(price_list)
+            print(f"Max value of {instrument[0]}:  {max_price}")
+            percentile = self.calculate_percent_change(price_list[-1], max_price)
+            percent_list.append([instrument[0],max_price,percentile])
+            info_list.append([instrument[0], price_list[0], price_list[-1], 
+                              self.calculate_percent_change(price_list[-1], price_list[0]),
+                              instrument[2].strftime("%Y-%m-%d")])
         msg = self.change_format(percent_list)
         asyncio.run(self.send(msg))
+        msg = '\n'.join([' | '.join(map(str, item)) for item in info_list[1:]])
+        asyncio.run(self.send(msg)) 

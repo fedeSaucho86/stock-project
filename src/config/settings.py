@@ -8,10 +8,10 @@ CONFIG = {
     'private': os.getenv('private'),
     'token': os.getenv('token'),
     'chat_id': os.getenv('chat_id'),
-    'instruments': [ ['GGAL',3279, 'Acciones', datetime.datetime(2024, 4, 23)],
-                ['AL30',59000, 'BONOS', datetime.datetime(2024, 4, 23)],
-                ['SAMI',790, 'Acciones', datetime.datetime(2024, 4, 23)],
-                ['BHIP',414.50, 'Acciones',datetime.datetime(2024, 4, 23)],
+    'instruments': [ ['GGAL', 'Acciones', datetime.datetime(2024, 4, 10)],
+                ['AL30', 'BONOS', datetime.datetime(2024, 3, 26)],
+                ['SAMI', 'Acciones', datetime.datetime(2024, 4, 12)],
+                ['BHIP', 'Acciones',datetime.datetime(2024, 5, 3)],
              ]
 }
 
